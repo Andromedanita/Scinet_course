@@ -1,0 +1,2 @@
+# This is the command I used to run the compiled code:
+./Assignment1

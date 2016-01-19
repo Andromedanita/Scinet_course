@@ -1,0 +1,6 @@
+First of all, I included all the libraries needed for this code.
+Then, I defined two functions called f and g where they take double x as input and
+return sin(2x) and cos(3x), respectively.
+Then, I defined the main function. Inside main() the starting and end point of x as well as the number of x points are defined and dx (the spacing between the x values) are computed.
+Then an output file is opened and header (x, sin(2) and cos(3x) is written to the file.
+After that, a for loop is included that starts from i=0 and goes until i<100, incrementing i by 1 at a time. The new value of x is determined each time by adding dx to x in each step and the values of sin(2x) and cos(3x) are calculated using f and g functions. In each step, these values are written ti the output file. After all this is done, outside the for loop, the output file is closed.
