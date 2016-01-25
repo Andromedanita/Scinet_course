@@ -1,71 +1,62 @@
 #include <cmath>
 #include <iostream>
+#include "initialize.h"
+#include "single_time_step.h"
+#include <rarray>
+
+
 int main()
 {
     // ants walk on a table
-    float number_of_ants[356][356];
-    float new_number_of_ants[356][356];
-    float velocity_of_ants[356][356];
+    const int table_size = 356;
+    int   end_time = 40;
+    float frac_move = 0.2;
     const int total_ants = 1010; // initial number of ants
+    
+    
     // initialize
-    for (int i=0;i<356;i++) {
-        for (int j=0;j<356;j++) {
-            velocity_of_ants[i][j] = M_PI*(sin((2*M_PI*(i+j))/3560)+1);
-        }
+    /*
+    float **velocity_of_ants   = new float *[table_size];
+    float **number_of_ants     = new float *[table_size];
+    float **new_number_of_ants = new float *[table_size];
+    
+    for (int i=0; i<table_size; i++) {
+        velocity_of_ants[i]   = new float [table_size];
+        number_of_ants[i]     = new float [table_size];
+        new_number_of_ants[i] = new float [table_size];
     }
-    int n = 0;
-    float z = 0;
-    for (int i=0;i<356;i++) {
-        for (int j=0;j<356;j++) {
-            number_of_ants[i][j] = 0.0;
-        }
-    }
-    while (n < total_ants) {
-        for (int i=0;i<356;i++) {
-            for (int j=0;j<356;j++) {
-                z += sin(0.3*(i+j));
-                if (z>1 and n!=total_ants) {
-                    number_of_ants[i][j] += 1;
-                    n += 1;
-                }
-            }
-        }
-    }
+    */
+    rarray<float,2> velocity_of_ants(table_size, table_size);
+    rarray<float,2> number_of_ants(table_size, table_size);
+    rarray<float,2> new_number_of_ants(table_size, table_size);
+    
+    initialize(table_size, velocity_of_ants, number_of_ants, total_ants);
+    
     // run simulation
-    for (int t = 0; t < 40; t++) {
-        float totants = 0.0;
-        for (int i=0;i<356;i++) {
-            for (int j=0;j<356;j++) {
-                totants += number_of_ants[i][j];
-            }
-        }
-        std::cout << t<< " " << totants << std::endl;
-        for (int i=0;i<356;i++) {
-            for (int j=0;j<356;j++) {
-                new_number_of_ants[i][j] = 0.0;
-            }
-        }
-        for (int i=0;i<356;i++) {
-            for (int j=0;j<356;j++) {
-                int di = 1.9*sin(velocity_of_ants[i][j]);
-                int dj = 1.9*cos(velocity_of_ants[i][j]);
-                int i2 = i + di;
-                int j2 = j + dj;
-                // some ants do not walk
-                new_number_of_ants[i][j]+=0.8*number_of_ants[i][j];
-                // the rest of the ants walk, but some fall of the table
-                if (i2>0 and i2>=356 and j2<0 and j2>=356) {
-                    new_number_of_ants[i2][j2]+=0.2*number_of_ants[i][j];
-                }
-            }
-        }
-        for (int i=0;i<356;i++) {
-            for (int j=0;j<356;j++) {
-                number_of_ants[i][j] = new_number_of_ants[i][j];
-                totants += number_of_ants[i][j];
-            }
-        }
+    for (int t = 0; t < end_time; t++) {
+        
+        single_time_step(table_size, t, number_of_ants, new_number_of_ants, velocity_of_ants, frac_move);
     }
+    /*
+    // deleting arrays
+    for (int i=0; i<table_size; i++) {
+        delete[] velocity_of_ants[i];
+        delete[] new_number_of_ants[i];
+        delete[] number_of_ants[i];
+    }
+    
+    delete[] velocity_of_ants;
+    delete[] new_number_of_ants;
+    delete[] number_of_ants;
+    */
+    //rarray<float,3> a(256, 256, 256);
+    //a[1][2][3] = 105;
+    
+    //std::cout << a[1][2][3] <<std::endl;
+    
+    
+    
     return 0;
+    
 }             
  
