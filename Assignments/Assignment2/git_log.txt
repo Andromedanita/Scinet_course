@@ -1,0 +1,35 @@
+commit c5d9d6f685e72772ce4ebde713f6e7d4c038221f
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Wed Jan 27 14:39:42 2016 -0500
+
+    using pointer to pointer array as test- not for class
+
+commit 718aad9c12c511007bed5a58e610b06b6da84e31
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Wed Jan 27 14:38:44 2016 -0500
+
+    cleaned and added comments
+
+commit 45324cc6fea4dc982c299737378c40f3a6af67e0
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Tue Jan 26 17:39:10 2016 -0500
+
+    Makefile added
+
+commit 0b7b17827bf84749c2dcb0b0b16842803cb60c68
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Sun Jan 24 23:53:23 2016 -0500
+
+    modularized the code and used rarray library
+
+commit a7e2cc6fb0f96932ed8b1436648c188567e176cd
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Fri Jan 22 12:13:01 2016 -0500
+
+    original code
+
+commit 399184d8ffa91402409ef8c160ecb9c51f1552ff
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Tue Jan 19 15:00:14 2016 -0500
+
+    first assignment added
