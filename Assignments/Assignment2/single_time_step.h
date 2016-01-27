@@ -1,6 +1,8 @@
+// setting gaurds
 #ifndef SINGLE_TIME_STEP_H
 #define SINGLE_TIME_STEP_H
 
+// including output_time_step.h since this header is for the code that depends on the function defined in output header
 #include <iostream>
 #include <cmath>
 #include "output_time_step.h"
