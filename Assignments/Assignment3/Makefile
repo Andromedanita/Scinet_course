@@ -1,5 +1,5 @@
 # Anita Bahmanyar
-TICKTOCK_PATH =/Users/anita/Documents/Grad_First_Year/Scinet_Course/ticktock
+TICKTOCK_PATH =/home/bahmanyar/ticktock
 CPP      = g++  -pg -g  # setting the compiler
 CPPFLAGS = -I${TICKTOCK_PATH} -O2 #-lstdc++ # setting the flags
 PROF     = gprof
