@@ -1,9 +1,29 @@
 # Anita Bahmanyar
 TICKTOCK_PATH =/Users/anita/Documents/Grad_First_Year/Scinet_Course/ticktock
-CPP      = g++  # setting the compiler
-CPPFLAGS = -std=c++11  -I${TICKTOCK_PATH} -O2 # setting the flags
+CPP      = g++  -pg -g  # setting the compiler
+CPPFLAGS = -I${TICKTOCK_PATH} -O2 #-lstdc++ # setting the flags
+PROF     = gprof
 
-all: ants # the key to run if we only type make
+all: profiling #ants # the key to run if we only type make
+
+
+profiling: move_files
+	${PROF} ants ants_gmon.out > ants_gmon.txt
+	${PROF} ants_orig ants_orig_gmon.out > ants_orig_gmon.txt
+
+
+move_files: ants ants_orig
+	./ants
+	mv gmon.out ants_gmon.out
+	./ants_orig
+	mv gmon.out ants_orig_gmon.out
+
+
+ants_orig: ants_orig.o ticktock.o
+	${CPP} ants_orig.o ticktock.o -o ants_orig
+
+ants_orig.o: ants_orig.cc
+	${CPP} ${CPPFLAGS} ants_orig.cc -c -o ants_orig.o
 
 # linking all the files to one single output file (ants)
 ants: single_time_step.o output_time_step.o initialize.o ants.o ticktock.o
@@ -27,4 +47,4 @@ ticktock.o: ${TICKTOCK_PATH}/ticktock.cc
 
 # cleaning the directory by removing executable and the output files
 clean:
-	rm -f initialize.o single_time_step.o output_time_step.o ticktock.o ants.o ants
+	rm -f initialize.o single_time_step.o output_time_step.o ticktock.o ants.o ants_orig.o ants_gmon.out ants_orig_gmon.out ants
