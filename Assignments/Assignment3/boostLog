@@ -1,0 +1,25 @@
+Running 3 test cases...
+Entering test suite "stringtest"
+Entering test suite "stringtest"
+Entering test case "table_size_1"
+0 1003
+test.cpp(23): info: check number_of_ants[0][0] == 1003 passed
+Leaving test case "table_size_1"; testing time: 279mks
+Entering test case "table_size_2"
+0 1000
+test.cpp(43): info: check number_of_ants[0][0] == 100 passed
+test.cpp(44): info: check number_of_ants[0][1] == 200 passed
+test.cpp(45): info: check number_of_ants[1][0] == 300 passed
+test.cpp(46): info: check number_of_ants[1][1] == 400 passed
+Leaving test case "table_size_2"; testing time: 294mks
+Entering test case "check_num_ants_1"
+0 2.90993e+06
+Table Size: 77	Total ants (begin): 2.90993e+06	Total ants (end): 2.86292e+06	Fraction of moving ants: 0.850008
+
+test.cpp(72): info: check total_ants_begin >= total_ants_end passed
+Leaving test case "check_num_ants_1"; testing time: 1509mks
+Leaving test suite "stringtest"
+Leaving test suite "stringtest"
+
+*** No errors detected
+
