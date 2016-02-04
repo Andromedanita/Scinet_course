@@ -6,7 +6,6 @@ Then it computes the new number of ants on each square of the table.
 */
 
 # include "single_time_step.h"
-
 // function that moves the ants over one single time step
 void single_time_step(int table_size, int t, rarray<float,2>& number_of_ants, rarray<float,2>& new_number_of_ants, rarray<float,2>& velocity_of_ants, float frac_move){
     

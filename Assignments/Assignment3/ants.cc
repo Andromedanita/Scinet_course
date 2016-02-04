@@ -9,7 +9,7 @@ compute the mean number of ants on each square of the table.
 #include "single_time_step.h"
 #include <rarray>
 #include <ticktock.h>
-
+using namespace std;
 int main()
 {
     // ants walk on a table
