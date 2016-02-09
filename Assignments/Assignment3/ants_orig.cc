@@ -2,6 +2,8 @@
 #include <iostream>
 #include <ticktock.h>
 
+using namespace std;
+
 int main()
 {
     // ants walk on a table
@@ -10,7 +12,7 @@ int main()
     float velocity_of_ants[356][356];
     const int total_ants = 1010; // initial number of ants
     TickTock stopwatch;
-    
+    TickTock timer_single;
     stopwatch.tick();
     // initialize
     for (int i=0;i<356;i++) {
@@ -39,13 +41,15 @@ int main()
     // run simulation
     for (int t = 0; t < 40; t++) {
         float totants = 0.0;
+	timer_single.tick();
         for (int i=0;i<356;i++) {
             for (int j=0;j<356;j++) {
                 totants += number_of_ants[i][j];
             }
         }
-        std::cout << t<< " " << totants << std::endl;
-        for (int i=0;i<356;i++) {
+        //std::cout << t<< " " << totants << std::endl;
+	std::cout << "Doing timestep " << t << "\n" << "Total number of ants: " << totants <<  std::endl;
+	for (int i=0;i<356;i++) {
             for (int j=0;j<356;j++) {
                 new_number_of_ants[i][j] = 0.0;
             }
@@ -70,6 +74,8 @@ int main()
                 totants += number_of_ants[i][j];
             }
         }
+	timer_single.tock("Elapsed time for this step is:");
+	cout << "\n" << endl;
     }
     stopwatch.tock("Elapsed time is:");
     return 0;
