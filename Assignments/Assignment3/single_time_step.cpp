@@ -14,7 +14,7 @@ void single_time_step(int table_size, int t, rarray<float,2>& number_of_ants, ra
     float totants = output_per_time_step(table_size, number_of_ants);
     
     // printing out the total number of ants (since some fall off)
-    std::cout << t<< " " << totants << std::endl;
+    std::cout << "Doing timestep " << t << "\n" << "Total number of ants: " << totants << std::endl;
     
     for (int i=0;i<table_size;i++) {
         for (int j=0;j<table_size;j++) {
