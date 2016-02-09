@@ -7,7 +7,8 @@ My modularized code took 0.3383 seconds to run the whole code with each time ste
 seconds.
 The original code took 0.2548 seconds to run the whole code with each time step taking between 0.006045 and 0.006082
 seconds.
-So to conclude, my modularized code is a bit slower than the original code as a whole and also for each time step, but modularizing it makes it easier to read the main code and to debug it.
+So to conclude, my modularized code is a bit slower than the original code as a whole and also for each time step,
+but modularizing it makes it easier to read the main code and to debug it.
 
 Here is the result of using time ./ants for my modularized code to see the where the code is spending its most time on:
 real 0m0.339s
@@ -21,3 +22,12 @@ sys	 0m0.000s
 
 So for both codes wall time and actual user time are the main bottlenecks of the code and system time is very small.
 
+Here are the results of profiling both codes using gprof (the output files can be found in ant_gmon.out for my modularized
+code and in ants_orig_gmon.txt for the original code profiling):
+In my modularized code, my single_time_step() function is taking most of the time. Lines 33 and 39 in single_time_step.cpp are
+the lines that take most of the computing time. These lines are figuring out the number of ants where some ants do not move
+and also assigning new number of ants based on the ones that do move.
+In the original code, the part that takes most of the time are lines 44, 60, 64 and 67. These lines are also calculating the
+velocity of the ants in y direction (dj = 1.9*cos(velocity_of_ants[i][j])), computing new number of ants when some of those
+do not walk and also assigning new number of ants when some do walk. So the lines that take most of the time in the original
+code are the same as the ones that take most of the running time in my modularized code. 
