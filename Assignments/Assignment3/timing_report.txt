@@ -1,0 +1,23 @@
+This comparison is for my code ran on Scinet gpc development node:
+Here is the comparison between the timing of running the whole code using the original ants code(ants_orig.cc) and my
+own modularized code(ants.cpp) as well as timing each time step of calculating the new number of ants on the table
+using ticktock code provided in the git repository(which I cloned to get the files):
+
+My modularized code took 0.3383 seconds to run the whole code with each time step taking between 0.008141 and 0.008155
+seconds.
+The original code took 0.2548 seconds to run the whole code with each time step taking between 0.006045 and 0.006082
+seconds.
+So to conclude, my modularized code is a bit slower than the original code as a whole and also for each time step, but modularizing it makes it easier to read the main code and to debug it.
+
+Here is the result of using time ./ants for my modularized code to see the where the code is spending its most time on:
+real 0m0.339s
+user 0m0.329s
+sys  0m0.002s
+
+and here is the same timing for the original code:
+real	 0m0.277s
+user	 0m0.273s
+sys	 0m0.000s
+
+So for both codes wall time and actual user time are the main bottlenecks of the code and system time is very small.
+
