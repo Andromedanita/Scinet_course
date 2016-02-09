@@ -27,7 +27,7 @@ code and in ants_orig_gmon.txt for the original code profiling):
 In my modularized code, my single_time_step() function is taking most of the time. Lines 33 and 39 in single_time_step.cpp are
 the lines that take most of the computing time. These lines are figuring out the number of ants where some ants do not move
 and also assigning new number of ants based on the ones that do move.
-In the original code, the part that takes most of the time are lines 44, 60, 64 and 67. These lines are also calculating the
+In the original code, the part that takes most of the time are lines 60, 64 and 67. These lines are also calculating the
 velocity of the ants in y direction (dj = 1.9*cos(velocity_of_ants[i][j])), computing new number of ants when some of those
 do not walk and also assigning new number of ants when some do walk. So the lines that take most of the time in the original
 code are the same as the ones that take most of the running time in my modularized code. 
