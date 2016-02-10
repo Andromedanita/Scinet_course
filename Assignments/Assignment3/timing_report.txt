@@ -34,4 +34,5 @@ code are the same as the ones that take most of the running time in my modulariz
 
 Suggestions for making the code faster could be try to fit as many of the stuff in the same loop as possible such that the
 number of loops used is smaller and it avoids repeatition of similar loops.
-Another way of making the code faster could be to not pass the new number of ants to a new array, just store it in a variable and pass it as a variable as the return of the function so we allocate less memory to a table of 356 by 356 in this case.
+Another way of making the code faster could be to not pass the new number of ants to a new array, just store it in a variable
+and pass it as a variable as the return of the function so we allocate less memory to a table of 356 by 356 in this case.
