@@ -11,9 +11,9 @@ So to conclude, my modularized code is a bit slower than the original code as a 
 but modularizing it makes it easier to read the main code and to debug it.
 
 Here is the result of using time ./ants for my modularized code to see the where the code is spending its most time on:
-real 0m0.339s
-user 0m0.329s
-sys  0m0.002s
+real     0m0.339s
+user     0m0.329s
+sys      0m0.002s
 
 and here is the same timing for the original code:
 real	 0m0.277s
@@ -45,4 +45,5 @@ events.
 To get the system and user timing, I compiled the codes and then ran time ./executable_file to get the times.
 
 To do the profiling using gprof, I used g++ -pg -g command for running my code and then running gprof --line executable_file. This command
-created an output file called gmon.out that I convert to the txt format inside my Makefile. We can then read the output and see how much time is spend on each function and which line of the codes takes the longest.
+created an output file called gmon.out that I convert to the txt format inside my Makefile. We can then read the output and see how much
+time is spend on each function and which line of the codes takes the longest.
