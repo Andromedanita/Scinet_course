@@ -1,7 +1,7 @@
 # Anita Bahmanyar
 TICKTOCK_PATH =/home/b/bovy/bahmanya/ticktock #ticktock code path if not in the same directory as your code
-CPP        = g++  -pg -g             # setting the compiler
-CPPFLAGS   = -O2 #-lboost_unit_test_framework #-I${TICKTOCK_PATH} -O2  # setting the flags
+CPP        = g++  -pg -g  # setting the compiler
+CPPFLAGS   = -O2          # setting the flags
 PROF       = gprof --line # setting the profiling (--line for showing the lines of code taking most of the run time)
 BOOST_FLAG = -lboost_unit_test_framework
 
@@ -21,13 +21,14 @@ move_files: ants ants_orig
 	./ants_orig
 	mv gmon.out ants_orig_gmon.out
 
+# running boost to test units of my modularized code (single_time_step in this case)
 test: test.o initialize.o single_time_step.o output_time_step.o ticktock.o
-	${CPP} ${CPPFLAGS} ${BOOST_FLAG} initialize.o single_time_step.o output_time_step.o ticktock.o  boost_testing.o -o boost_testing	
-	./boost_testing > boost_log.txt 
+	${CPP} ${CPPFLAGS} ${BOOST_FLAG} initialize.o single_time_step.o output_time_step.o ticktock.o  boost_test.o -o boost_test	
+	./boost_test > boost_log.txt 
 
+# linking all the files for test to test.o file
 test.o: boost_test.cpp
-        #${CPP} ${CPPFLAGS} boost_test.cpp -c -o boost_testing.o
-	${CPP} ${CPPFLAGS} ${BOOST_FLAG} boost_test.cpp -c -o boost_testing.o
+	${CPP} ${CPPFLAGS} ${BOOST_FLAG} boost_test.cpp -c -o boost_test.o
 
 # linking all the files to one single output file for the original code (ants_orig)
 ants_orig: ants_orig.o ticktock.o
@@ -64,4 +65,4 @@ ticktock.o: ticktock.cc
 
 # cleaning the directory by removing executable and the output files
 clean:
-	rm -f initialize.o single_time_step.o output_time_step.o ticktock.o ants.o ants_orig.o ants_gmon.out ants_orig_gmon.out ants
+	rm -f initialize.o single_time_step.o output_time_step.o ticktock.o ants.o ants_orig.o boost_test.o ants_gmon.out ants_orig_gmon.out ants
