@@ -31,3 +31,8 @@ In the original code, the part that takes most of the time are lines 60, 64 and 
 velocity of the ants in y direction (dj = 1.9*cos(velocity_of_ants[i][j])), computing new number of ants when some of those
 do not walk and also assigning new number of ants when some do walk. So the lines that take most of the time in the original
 code are the same as the ones that take most of the running time in my modularized code. 
+
+Suggestions for making the code faster could be try to fit as many of the stuff in the same loop as possible such that the
+number of loops used is smaller and it avoids repeatition of similar loops.
+Another way of making the code faster could be to not pass the new number of ants to a new array, just store it in a variable
+and pass it as a variable as the return of the function so we allocate less memory to a table of 356 by 356 in this case.
