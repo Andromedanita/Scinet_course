@@ -1,0 +1,16 @@
+Here is the command line I use to use the boost unit test:
+$ make test
+
+This is because I have defined test in my Makefile.
+The output of the boost unit testing on the terminal screen is:
+g++  -pg -g   -O2           -lboost_unit_test_framework boost_test.cpp -c -o boost_test.o
+g++  -pg -g   -O2           initialize.cpp -c -o initialize.o
+g++  -pg -g   -O2            single_time_step.cpp -c -o single_time_step.o
+g++  -pg -g   -O2            output_time_step.cpp -c -o output_time_step.o
+g++  -pg -g   -O2           ticktock.cc -c -o ticktock.o
+g++  -pg -g   -O2           -lboost_unit_test_framework initialize.o single_time_step.o output_time_step.o ticktock.o  boost_test.o -o boost_test 
+./boost_test > boost_log.txt 
+
+*** No errors detected
+
+The result of the boost unit testing is output into boost_log.txt file.

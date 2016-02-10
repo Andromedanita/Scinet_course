@@ -1,7 +1,7 @@
 # Anita Bahmanyar
-TICKTOCK_PATH =/home/b/bovy/bahmanya/ticktock #ticktock code path if not in the same directory as your code
-CPP        = g++  -pg -g  # setting the compiler
-CPPFLAGS   = -O2          # setting the flags
+
+CPP        = g++          # setting the compiler
+CPPFLAGS   = -pg -g -O2   # setting the flags
 PROF       = gprof --line # setting the profiling (--line for showing the lines of code taking most of the run time)
 BOOST_FLAG = -lboost_unit_test_framework
 
@@ -50,17 +50,13 @@ ants.o: ants.cc
 initialize.o: initialize.cpp
 	${CPP} ${CPPFLAGS} initialize.cpp -c -o initialize.o
 
-
 single_time_step.o: single_time_step.cpp
 	${CPP} ${CPPFLAGS}  single_time_step.cpp -c -o single_time_step.o
 
 output_time_step.o: output_time_step.cpp
 	${CPP} ${CPPFLAGS}  output_time_step.cpp -c -o output_time_step.o
 
-
-#ticktock.o: ${TICKTOCK_PATH}/ticktock.cc
 ticktock.o: ticktock.cc 
-        #${CPP} ${CPPFLAGS} ${TICKTOCK_PATH}/ticktock.cc -c -o ticktock.o	
 	${CPP} ${CPPFLAGS} ticktock.cc -c -o ticktock.o
 
 # cleaning the directory by removing executable and the output files

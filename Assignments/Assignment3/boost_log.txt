@@ -1,0 +1,25 @@
+Running 3 test cases...
+Running test # 1...
+Checking the initial movement of ants with zero velocity in a 1 X 1 table:
+Initial number of ants: 1050
+
+Doing timestep 0
+Total number of ants: 1050
+
+
+Running test # 2...
+Checking the movement of ants with zero velocity in a 4 X 4 table:
+Initial number of ants in square [0][0]: 1000
+
+Doing timestep 0
+Total number of ants: 1000
+
+
+Running test # 3...
+Checking if the new number of ants is smaller than the initial ones 
+so that ants are not created during the simulation:
+Table size is:94
+Total initial number of ants:4.40258e+06
+
+Doing timestep 0
+Total number of ants: 4.40258e+06
