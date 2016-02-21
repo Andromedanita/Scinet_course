@@ -11,9 +11,9 @@ So to conclude, my modularized code is a bit slower than the original code as a 
 but modularizing it makes it easier to read the main code and to debug it.
 
 Here is the result of using time ./ants for my modularized code to see the where the code is spending its most time on:
-real 0m0.339s
-user 0m0.329s
-sys  0m0.002s
+real     0m0.339s
+user     0m0.329s
+sys      0m0.002s
 
 and here is the same timing for the original code:
 real	 0m0.277s
@@ -24,10 +24,12 @@ So for both codes wall time and actual user time are the main bottlenecks of the
 
 Here are the results of profiling both codes using gprof (the output files can be found in ant_gmon.out for my modularized
 code and in ants_orig_gmon.txt for the original code profiling):
-In my modularized code, my single_time_step() function is taking most of the time. Lines 33 and 39 in single_time_step.cpp are
+
+In my modularized code, my single_time_step() function is taking most of the time(bottleneck). Lines 33 and 39 in single_time_step.cpp are
 the lines that take most of the computing time. These lines are figuring out the number of ants where some ants do not move
 and also assigning new number of ants based on the ones that do move.
-In the original code, the part that takes most of the time are lines 60, 64 and 67. These lines are also calculating the
+
+In the original code, the part that takes most of the time (bottlenecks) are lines 60, 64 and 67. These lines are also calculating the
 velocity of the ants in y direction (dj = 1.9*cos(velocity_of_ants[i][j])), computing new number of ants when some of those
 do not walk and also assigning new number of ants when some do walk. So the lines that take most of the time in the original
 code are the same as the ones that take most of the running time in my modularized code. 
@@ -36,3 +38,12 @@ Suggestions for making the code faster could be try to fit as many of the stuff 
 number of loops used is smaller and it avoids repeatition of similar loops.
 Another way of making the code faster could be to not pass the new number of ants to a new array, just store it in a variable
 and pass it as a variable as the return of the function so we allocate less memory to a table of 356 by 356 in this case.
+
+
+To run the timing command, I added an instance of the class TickTock and then I called tick() and tock() to get the time elapsed between two
+events.
+To get the system and user timing, I compiled the codes and then ran time ./executable_file to get the times.
+
+To do the profiling using gprof, I used g++ -pg -g command for running my code and then running gprof --line executable_file. This command
+created an output file called gmon.out that I convert to the txt format inside my Makefile. We can then read the output and see how much
+time is spend on each function and which line of the codes takes the longest.
