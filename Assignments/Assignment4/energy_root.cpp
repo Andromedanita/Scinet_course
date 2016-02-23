@@ -2,6 +2,29 @@
 
 using namespace std;
 
+double Espring(double x, void* param){
+  Params* p = (Params*)param;
+  double a  = p->a;
+  double b  = p->b;
+  double c  = p->c;
+  double d  = p->d;
+  double f  = p->f;
+  return a * ( (b/x) + ((d*d)/(f*(x-d)*(x-d))) - exp((-c*(x-b)*(x-b))/(2.*a)) );
+}
+
+
+double Eweight(double x, void* param){
+  Params* p = (Params*)param;
+  double g  = p->g;
+  double m  = p->m;
+  return -m * g * x;
+}
+
+double Etot(double x, void* param){
+  return Espring(x, param) + Eweight(x, param);
+}
+
+
 // derivative of spring energy
 double dEspring(double x,void* param){
   // assigning varibale names to the params for a less messy return argument 
@@ -61,7 +84,8 @@ double f_all_min(double mass, double x_lo, double x_hi, int iter_max, double pre
     double x_lo = gsl_root_fsolver_x_lower(solver);
     double x_hi = gsl_root_fsolver_x_upper(solver);
     cout << iter <<" "<< x_lo <<" "<< x_hi
-	      <<" "<< x_rt <<" "<< x_hi - x_lo << "\n";
+	 <<" "<< x_rt <<" "<< x_hi - x_lo << "\n";
+    //cout << "root is:" << x_rt << "\n";
     status = gsl_root_test_interval(x_lo,x_hi,0,prec);
   }
   // cleaning the memory

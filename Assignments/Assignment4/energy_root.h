@@ -17,7 +17,9 @@ struct Params{
   double a,b,c,d,f,g,m;
 };
 
-
+double Espring(double x, void* param);
+double Eweight(double x, void* param);
+double Etot(double x, void* param);
 double dEspring(double x, void* param);
 double dEweight(double x, void* param);
 double dEtot(double x, void* param);
