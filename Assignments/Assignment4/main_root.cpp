@@ -41,8 +41,8 @@ int main(){
     Params args = {1., 0.1, 100., 0.5, 2500., 9.8, 1.0}; 
     M = min_mass + (j*dm);
 
-    root1 = f_all_min(M,0.1,0.2,100,0.00001);
-    root2 = f_all_min(M,0.4,0.48,100,0.00001);
+    root1 = f_all_min(M,0.1,0.22,100,0.00001);
+    root2 = f_all_min(M,0.4,0.49,100,0.00001);
 
     E1 = Etot(root1, &args);
     E2 = Etot(root2, &args);

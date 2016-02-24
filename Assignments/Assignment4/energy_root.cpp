@@ -76,16 +76,15 @@ double f_all_min(double mass, double x_lo, double x_hi, int iter_max, double pre
   cout << " iter \t [ lower, upper] root err\n" <<endl;
   int status = 1;
 
-  double x_rt;
+  double x_rt = (x_hi-x_lo)/2.;
   // iterating to find the root iter_max times
   for (int iter=0; status and iter < iter_max; ++iter) {
     gsl_root_fsolver_iterate(solver);
-    double x_rt = gsl_root_fsolver_root(solver);
-    double x_lo = gsl_root_fsolver_x_lower(solver);
-    double x_hi = gsl_root_fsolver_x_upper(solver);
+    x_rt = gsl_root_fsolver_root(solver);
+    x_lo = gsl_root_fsolver_x_lower(solver);
+    x_hi = gsl_root_fsolver_x_upper(solver);
     cout << iter <<" "<< x_lo <<" "<< x_hi
 	 <<" "<< x_rt <<" "<< x_hi - x_lo << "\n";
-    //cout << "root is:" << x_rt << "\n";
     status = gsl_root_test_interval(x_lo,x_hi,0,prec);
   }
   // cleaning the memory
