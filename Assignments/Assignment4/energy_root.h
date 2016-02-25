@@ -24,6 +24,9 @@ double dEspring(double x, void* param);
 double dEweight(double x, void* param);
 double dEtot(double x, void* param);
 double f_all_min(double mass, double x_lo, double x_hi, int iter_max, double prec);
+double diff(double min1, double min2);
+double f_min_diff(double mass, double x_lo, double x_hi, int iter_max, double prec);
+double max_load(double min1, double min2, double maxmass);
 
 #endif
 

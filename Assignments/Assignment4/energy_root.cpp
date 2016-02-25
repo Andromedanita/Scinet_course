@@ -12,7 +12,6 @@ double Espring(double x, void* param){
   return a * ( (b/x) + ((d*d)/(f*(x-d)*(x-d))) - exp((-c*(x-b)*(x-b))/(2.*a)) );
 }
 
-
 double Eweight(double x, void* param){
   Params* p = (Params*)param;
   double g  = p->g;
@@ -23,7 +22,6 @@ double Eweight(double x, void* param){
 double Etot(double x, void* param){
   return Espring(x, param) + Eweight(x, param);
 }
-
 
 // derivative of spring energy
 double dEspring(double x,void* param){
@@ -91,3 +89,53 @@ double f_all_min(double mass, double x_lo, double x_hi, int iter_max, double pre
   gsl_root_fsolver_free(solver);
   return x_rt;
 }
+
+/*
+double diff(double min1, double min2, double mass, void* param){
+  Params args = {1., 0.1, 100., 0.5, 2500., 9.8, 1.0};
+  args.m = mass;
+  double E1 = Etot(min1, &args);
+  double E2 = Etot(min2, &args);
+  return abs(E1-E2);
+}
+
+
+double f_min_diff(double mass, double x_lo, double x_hi, int iter_max, double prec){
+  Params args = {1., 0.1, 100., 0.5, 2500., 9.8, 0.3};
+  // setting mass to the argument from the function                                                                                                 
+  args.m      = mass;
+
+  gsl_root_fsolver* solver;
+  gsl_function      fwrapper;
+  solver = gsl_root_fsolver_alloc(gsl_root_fsolver_brent);
+
+  // setting function for root finding to be dEtotal                                                                                                
+  // and the arguments to be the parameters given                                                                                                   
+  fwrapper.function = diff;
+  fwrapper.params   = &args;
+  gsl_root_fsolver_set(solver, &fwrapper, x_lo, x_hi);
+  cout << " iter \t [ lower, upper] root err\n" <<endl;
+  int status = 1;
+
+  double x_rt = (x_hi-x_lo)/2.;
+  // iterating to find the root iter_max times                                                                                                      
+  for (int iter=0; status and iter < iter_max; ++iter) {
+    gsl_root_fsolver_iterate(solver);
+    x_rt = gsl_root_fsolver_root(solver);
+    x_lo = gsl_root_fsolver_x_lower(solver);
+    x_hi = gsl_root_fsolver_x_upper(solver);
+    cout << iter <<" "<< x_lo <<" "<< x_hi
+         <<" "<< x_rt <<" "<< x_hi - x_lo << "\n";
+    status = gsl_root_test_interval(x_lo,x_hi,0,prec);
+  }
+  // cleaning the memory                                                                                                                            
+  gsl_root_fsolver_free(solver);
+  return x_rt;
+}
+
+double max_load(double mass, double x_lo, double x_hi, int iter_max, double prec){
+  double val = f_all_diff(mass, x_lo, x_hi, iter_max, prec);
+  cout << "maximum load mass is: " << mass << "value is: " << val << "\n" << endl;
+
+}
+*/
