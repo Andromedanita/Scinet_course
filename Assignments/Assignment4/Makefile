@@ -9,11 +9,11 @@ mains: main.o energy.o
 	${CPP} ${CPPFLAGS} main.o energy.o -o mains ${GCCLIB} 
 
 # creating the output files
-main.o: main_root.cpp
-	${CPP} ${CPPFLAGS} main_root.cpp -c -o main.o ${GCCLIB}
+main.o: main.cpp
+	${CPP} ${CPPFLAGS} main.cpp -c -o main.o ${GCCLIB}
 
-energy.o: energy_root.cpp
-	${CPP} ${CPPFLAGS} energy_root.cpp -c -o energy.o ${GCCLIB}
+energy.o: energy.cpp
+	${CPP} ${CPPFLAGS} energy.cpp -c -o energy.o ${GCCLIB}
 
 # cleaning the directory by removing executable and the output files
 clean:
