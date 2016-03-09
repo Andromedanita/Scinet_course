@@ -4,8 +4,32 @@
 #include <rarrayio>
 #include <complex>
 #include <fftw3.h>
+#include<cblas.h>
 
 using namespace std;
+
+// Power spectrum function
+void power(rarray<complex<double>,1> FT_signal){
+  rarray<double,1> power_spec;
+  for (int j=0;j<FT_signal.size(),j++){
+    rarray<complex<double>,1> prod = FT_signal[j] * conj(FT_signal[j]);
+    power_spec[j] = prod.real();
+  }
+  return power_spec;
+}
+
+// Correlation function
+void corr(rarray<double,1> F, rarray<double,1> G){
+  double FF = cblas_ddot(F.size(), F.data(), 1, F.data(), 1);
+  double GG = cblas_ddot(G.size(), G.data(), 1, G.data(), 1);
+  double FG = cblas_ddot(F.size(), F.data(), 1, G.data(), 1);
+  
+  double corr_val = FG/sqrt(FF * GG);
+
+  return corr_val;
+  
+}
+
 
 int main(){
   // open the file named f
@@ -28,11 +52,14 @@ int main(){
   
   cout << "signal FT is:" << FT_signal << "\n"  << endl;
 
-  // square fourier transform to get power spectrum for GWprediction.rat = F
+  
 
-
-  // write a function to compute the power spectrum
-
+  // power spectrum for GWprediction.rat = F
+  //rarray<double,1> power_spec;
+  //for (int j=0;j<FT_signal.size(),j++){
+  //  rarray<complex<double>,1> prod = FT_signal[j] * conj(FT_signal[j]);
+  //  power_spec[j] = prod.real()
+  //}
 
   // compute G  which is the fourier transform of detection01.rat. . .detection32.rat files
   
