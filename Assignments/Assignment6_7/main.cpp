@@ -6,6 +6,7 @@
 #include <fftw3.h>
 #include <cblas.h>
 #include <math.h>
+#include <string>
 
 using namespace std;
 
@@ -78,8 +79,17 @@ int main(){
   cout << "correlation is:" << C << endl;
   */
 
+  string num;
+  string filename;
   for (int k=0; k<32;k++){
-    rarray<complex<double>,1> detection = read_data("/home/b/bovy/bahmanya/Assignments/hw6_7/gwdata/","detection01.rat");
+    if (k < 10){
+      num = "0" + to_string(k);
+    }
+    else{
+      num = to_string(k);
+    }
+    filename = "detection" + num +  ".rat"; 
+    rarray<complex<double>,1> detection = read_data("/home/b/bovy/bahmanya/Assignments/hw6_7/gwdata/",filename);
     rarray<complex<double>,1> f = Fourier_Trans(detection);
     rarray<complex<double>,1> g = Fourier_Trans(GW_signal);
 
@@ -89,7 +99,19 @@ int main(){
     double C = corr(F, G);
 
     cout << "correlation is:" << C << endl;
+    rarray<double,1> correlation_array(32);
+    correlation_array[k] = C;
   }
   
+  double max_val = 0;
+  for (int i=0; i<32;i++){
+    if(correlation_array[i]>max_val){
+      max_val = correlation_array[i];
+      cout << "maximum value found at detection numbee " << i << "with correlation value of " << max_val << endl;
+      correlation_array[i] = 0;
+    }
+  }
+
+
   return 0;
 }
