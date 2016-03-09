@@ -64,10 +64,11 @@ rarray<complex<double>,1> read_data(string dir,string filename){
 
 int main(){
   rarray<complex<double>,1> GW_signal = read_data("/home/b/bovy/bahmanya/Assignments/hw6_7/gwdata/","GWprediction.rat");
+  /*
   rarray<complex<double>,1> detection = read_data("/home/b/bovy/bahmanya/Assignments/hw6_7/gwdata/","detection01.rat");
   
-  rarray<double,1> f = Fourier_Trans(detection);
-  rarray<double,1> g = Fourier_Trans(GW_signal);
+  rarray<complex<double>,1> f = Fourier_Trans(detection);
+  rarray<complex<double>,1> g = Fourier_Trans(GW_signal);
 
   rarray<double,1> F = power_spec(f);
   rarray<double,1> G = power_spec(g);
@@ -75,10 +76,20 @@ int main(){
   double C = corr(F, G);
   
   cout << "correlation is:" << C << endl;
-  
-  //for (int k=0; k<32;k++){
-  
-  //}
+  */
+
+  for (int k=0; k<32;k++){
+    rarray<complex<double>,1> detection = read_data("/home/b/bovy/bahmanya/Assignments/hw6_7/gwdata/","detection01.rat");
+    rarray<complex<double>,1> f = Fourier_Trans(detection);
+    rarray<complex<double>,1> g = Fourier_Trans(GW_signal);
+
+    rarray<double,1> F = power_spec(f);
+    rarray<double,1> G = power_spec(g);
+
+    double C = corr(F, G);
+
+    cout << "correlation is:" << C << endl;
+  }
   
   return 0;
 }
