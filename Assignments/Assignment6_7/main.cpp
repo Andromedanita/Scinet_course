@@ -17,7 +17,7 @@ int main(){
   f >> times;
   f >> signal;
 
-
+  // creating the fourier transform of an array
   int n       = signal.size();
   rarray<complex<double>,1> FT_signal(n);
 
@@ -28,22 +28,19 @@ int main(){
   
   cout << "signal FT is:" << FT_signal << "\n"  << endl;
 
-  
-  //for (int i=0; i<n; i++)
-  //  cout << sig[i] << "," << sighat[i] << endl;
-  //return 0;
+  // square fourier transform to get power spectrum for GWprediction.rat = F
 
-  //for (int i=0; i<432330;i++){
-  //  cout << "time is:" << signal[i] << "\n" << endl;
-  //}
- 
-  //cout << "trial" << times.extent(1) << "\n" <<endl;
-  //cout << "size of time array is:" << times.extent(0) << "\n" << endl;
-  //cout << "size of signal array is:" << signal.extent(0) << "\n" << endl;
-  //cout << "signal array:" << signal << endl;
-  //cout << "entent1:" << signal.extent(1) << endl;
-  //cout << "size of time array is:" << sizeof(times) << endl;
-  //cout << "size of signal array is:" << sizeof(signal) << endl;
+
+  // write a function to compute the power spectrum
+
+
+  // compute G  which is the fourier transform of detection01.rat. . .detection32.rat files
+  
+
+  // compute correlation between F and G
+
+
+  // repeat this for each of the detection01.rat ... detection32.rat files
 
   return 0;
 }
