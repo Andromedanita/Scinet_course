@@ -16,19 +16,22 @@ int main(){
   // read in the signal
   f >> times;
   f >> signal;
- 
-  complex<double> sig[n],sighat[n];
 
-  int n       = times.size();
-  //f           = signal;
-  fftw_plan p = fftw_plan_dft_1d(n,
-				 (fftw_complex*)sig, (fftw_complex*)fhat,
-				 FFTW_FORWARD, FFTW_ESTIMATE);
+
+  int n       = signal.size();
+  rarray<complex<double>,1> FT_signal(n);
+
+  fftw_plan p = fftw_plan_dft_1d(n,(fftw_complex*)signal.data(), (fftw_complex*)FT_signal.data(),FFTW_FORWARD, FFTW_ESTIMATE);
+
   fftw_execute(p);
   fftw_destroy_plan(p);
-  for (int i=0; i<n; i++)
-    cout << sig[i] << "," << sighat[i] << endl;
-  return 0;
+  
+  cout << "signal FT is:" << FT_signal << "\n"  << endl;
+
+  
+  //for (int i=0; i<n; i++)
+  //  cout << sig[i] << "," << sighat[i] << endl;
+  //return 0;
 
   //for (int i=0; i<432330;i++){
   //  cout << "time is:" << signal[i] << "\n" << endl;
@@ -42,4 +45,5 @@ int main(){
   //cout << "size of time array is:" << sizeof(times) << endl;
   //cout << "size of signal array is:" << sizeof(signal) << endl;
 
+  return 0;
 }
