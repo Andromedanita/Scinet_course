@@ -1,5 +1,7 @@
 // Anita Bahmanyar
+// Header file
 
+// Defining gaurds
 #ifndef FUNC_H
 #define FUNCH
 

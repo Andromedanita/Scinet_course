@@ -1,11 +1,11 @@
-CPP      = g++             # setting the compiler
-CPPFLAGS = -std=c++11  -O2 # setting the flags
-FFTLIB   = -lfftw3
-BLASLIB  = -lopenblas 
+CPP      = g++             # setting the  compiler
+CPPFLAGS = -std=c++11  -O2 # setting the  flags
+FFTLIB   = -lfftw3         # setting fft  library
+BLASLIB  = -lopenblas      # setting blas library
 
 all: main # the key to run if we only type make
 
-# linking all the files to one single output file (ants)
+# linking all the files to one single output file (main)
 main: main.o funcs.o
 	${CPP} ${CPPFLAGS} main.o funcs.o -o main ${FFTLIB} -I${SCINET_OPENBLAS_INC} -L${SCINET_OPENBLAS_LIB} ${BLASLIB}
 

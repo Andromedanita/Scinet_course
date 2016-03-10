@@ -1,0 +1,6 @@
+#Max number	detection file number	maximum value
+1	 	20	 	 	0.99222
+2	 	15	 	 	0.967221
+3	 	1	 	 	0.939055
+4	 	17	 	 	0.896847
+5	 	2	 	 	0.887038
