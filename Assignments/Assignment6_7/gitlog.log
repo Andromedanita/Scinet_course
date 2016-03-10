@@ -1,0 +1,89 @@
+* 26e0b8e : cleaned the directory
+* 6bfd9c7 : removed main exe file
+* d702a8e : commented the codes, modified main code to save output files
+* 035edaf : fixed maximum values
+* 41273c1 : cleared extra commented lines
+* a1bb2b2 : deparated functions outside of the main code
+* 2a757a7 : added for loop for iteratinfg over detection files and also finding max
+* 12a5982 : fixed the error and it now runs
+* 89be71c : debugged the functions
+* 2d1b7ae : writing main file
+* e0f3948 : added power spectrum and correlation functions inside main
+* 42bc93f : wrote the procedure
+* feaa1c1 : makefile added
+* 551b677 : started the assignment
+* 3ae325d : git log added
+* bbc9605 : added git log
+* d96236d : fixed everything
+* e7c1b7b : output of second part of assignment 2
+* 0157490 : no errors while printing the 25 iterations over mass
+* 7197f6e : fixed the issue of printing out zero by assiging an initial value to the x_root
+* 7aec162 : added mass-extension relation codes but the return value of root is 0 in to the consule while it shows correct inside the for loop
+* 1fd3f63 : works for mass of 0.3 but printing on the consule is still 0 even though the root printing inside the loop is correct
+* 7d9d399 : finding the minimum by finding the root of the derivative of the energy
+* 5125dd6 : finding one minimum
+*   b0f3eae : Merge branch 'master' of github.com:Andromedanita/Scinet_course
+|\  
+| * fb3f236 : Editted the report
+| *   089a6d9 : Merge branch 'master' of https://github.com/Andromedanita/Scinet_course
+| |\  
+| * | a185db1 : Editted the report
+* | | 423ae04 : testing gsl minimization
+| |/  
+|/|   
+* |   c21cbde : Merge branch 'master' of github.com:Andromedanita/Scinet_course
+|\ \  
+| |/  
+| *   393ab39 : Merge branch 'master' of https://github.com/Andromedanita/Scinet_course
+| |\  
+| | * 1298736 : Create README.md
+| * | 7dc2f6e : added suggestions for making the code faster
+| |/  
+| *   e2651d7 : Merge branch 'master' of https://github.com/Andromedanita/Scinet_course
+| |\  
+| * | 0bae118 : added suggestions for making the code faster
+* | | 95c5f73 : Makefile cleaned, boost code commented and output files added to git
+| |/  
+|/|   
+* | 194af05 : added comments and cleaned the Makefile
+* | 68c6969 : Makefile includes boost command and boost_test code runs with no error on scinet
+|/  
+* 349bc59 : profiling report added
+*   d90f03e : Merge branch 'master' of https://github.com/Andromedanita/Scinet_course
+|\  
+| * 8dd6102 : commented the Makefile more
+| *   7dce341 : Merge branch 'master' of github.com:Andromedanita/Scinet_course
+| |\  
+| * | ff58837 : added --line to the gprof
+* | | 1dfe673 : profiling report added
+| |/  
+|/|   
+* |   214cb59 : timing of both codes added
+|\ \  
+| |/  
+| * 9187df3 : added timing for each time step
+| * b0dd3a8 : testing git
+| *   660aafe : Merge branch 'master' of github.com:Andromedanita/Scinet_course
+| |\  
+| * | cd0de37 : Added timing of each timestep and printing out of the time for each step
+* | | 20aa8be : Started writing report on timing for both codes
+| |/  
+|/|   
+* |   c4efa13 : merged ants.cc
+|\ \  
+| * | 13264d8 : boost log added
+| * | 86c3757 : boost code added
+| * | 4b7ef74 : boost added
+| |/  
+* | 4db1f4d : Added timing for each time step and added the printing of the times
+|/  
+* f78f352 : profiling commands added to the Makefile
+* b1df1d9 : original code renames
+* 262bed0 : ticktock added
+* d46fecc : added output files for the homework
+* c5d9d6f : using pointer to pointer array as test- not for class
+* 718aad9 : cleaned and added comments
+* 45324cc : Makefile added
+* 0b7b178 : modularized the code and used rarray library
+* a7e2cc6 : original code
+* 399184d : first assignment added
