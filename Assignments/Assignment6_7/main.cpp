@@ -16,8 +16,9 @@ int main(){
   rarray<complex<double>,1> GW_signal = read_data("/home/b/bovy/bahmanya/Assignments/hw6_7/gwdata/","GWprediction.rat");
   string num;
   string filename;
+  int nfile = 32;
   rarray<double,1> correlation_array(32);
-  for (int k=1; k<32;k++){
+  for (int k=1; k<=nfile;k++){
     if (k < 10){
       num = "0" + to_string(k);
       cout <<  " num is "<< num << endl; 
@@ -37,21 +38,23 @@ int main(){
     double C = corr(F, G);
 
     cout << "correlation is:" << C << "\n" << endl;
-    correlation_array[k] = C;
+    correlation_array[k-1] = C;
   }
   
   rarray<double,1> max_array(5);
   double max_val = 0;
-  for (int i=1; i<32;i++){
-    if(correlation_array[i]>max_val){
-      max_val = correlation_array[i];
-      int q = 0;
-      max_array[q] = max_val;
-      q++;
-      cout << "maximum value found at detection number " << i << " with correlation value of " << max_val << endl;
-      max_val = 0;
-      correlation_array[i] = 0;
+  int maxIndex = 0;
+  for (int i=0; i < 5 ; i++){
+    for(int j =0 ; j < nfile ; j++){
+    if(correlation_array[j]>max_val){
+      max_val = correlation_array[j];
+      maxIndex  = j;
+      }
     }
+    cout << i+1 << ") maximum value found at detection number " << maxIndex+1  << " with correlation value of " << max_val << endl;
+    max_val = 0;
+    correlation_array[maxIndex] = 0;
+    maxIndex = 0; 
   }
   
   return 0;
