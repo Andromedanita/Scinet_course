@@ -1,3 +1,4 @@
+// Anita Bahmanyar, March 23, 2016 
 // 
 // walkring_timestep.cc
 //
@@ -9,7 +10,10 @@
 
 using namespace std;
 
+// initializing the random generator
 default_random_engine engine;
+
+// the random numbers are drawn uniformly between 0 and 1
 uniform_real_distribution<double> uniform(0.0,1.0);
 
 // perform a single time step for the random walkers
@@ -20,15 +24,9 @@ uniform_real_distribution<double> uniform(0.0,1.0);
 //    the probability to stay on the same spot is thus 1-2p.
 void perform_time_step(rarray<int,1>& pos, int N, double p)
 {
-  // PART OF THE ASSIGNMENT!
-  //default_random_engine engine;
-  //uniform_int_distribution<int> uniform;
   int Z = pos.size();
-  //int seed = 1.0;
-  //engine.seed(seed);
 
-  //rarray<double,1>walker;
-  //walker.fill(0.0);
+  // looping through all grids
   for (int i=0;i<Z;i++){
     double state = uniform(engine);
     if (state>0 and state<p){
