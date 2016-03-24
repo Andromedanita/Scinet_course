@@ -1,0 +1,429 @@
+commit 87a88f9b7616ca856b5f1b172453857f1156125c
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Thu Mar 24 15:49:55 2016 -0400
+
+    output added. well commented codes and final version of the codes also added
+
+commit 59a68de7f0714c399aaa23aedb380a13e807a29d
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Wed Mar 23 22:34:27 2016 -0400
+
+    commented the codes
+
+commit baea41cf2a8105a4e6b9a0ba69ba1dcf8ae368b3
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Wed Mar 23 17:21:26 2016 -0400
+
+    filled in the blank inside each function and it works now
+
+commit c7c3b6e672bf2de60e3d796b838d1488608fbe73
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Wed Mar 23 11:55:05 2016 -0400
+
+    copied all the initial codes to the repository
+
+commit 8e3ec0e9b74cb875097e805cad1b1e861b52ee42
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Thu Mar 10 11:45:57 2016 -0500
+
+    git log file added
+
+commit 26e0b8e955f158dcb62e4aa1503ae98fa1092164
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Thu Mar 10 11:40:56 2016 -0500
+
+    cleaned the directory
+
+commit 6bfd9c75757fb5860254e762f14e61010443b20a
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Thu Mar 10 11:40:34 2016 -0500
+
+    removed main exe file
+
+commit d702a8e2d0beb9bf655ea141f8a446d3cc69fa5f
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Thu Mar 10 11:39:03 2016 -0500
+
+    commented the codes, modified main code to save output files
+
+commit 035edafd10926c3d46efe900478016b315adca46
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Wed Mar 9 19:49:20 2016 -0500
+
+    fixed maximum values
+
+commit 41273c1b0e1a1ce3e696acb87ed779f23a2aff28
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Wed Mar 9 18:48:13 2016 -0500
+
+    cleared extra commented lines
+
+commit a1bb2b27faf6b185b55395f1c746ed228dcd0542
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Wed Mar 9 18:37:40 2016 -0500
+
+    deparated functions outside of the main code
+
+commit 2a757a7ce544b91b78a9c93019d34d423f786e74
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Wed Mar 9 13:05:48 2016 -0500
+
+    added for loop for iteratinfg over detection files and also finding max
+
+commit 12a59825673d79d4218978c9f33f131d6d0b4676
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Wed Mar 9 09:19:33 2016 -0500
+
+    fixed the error and it now runs
+
+commit 89be71ccf53b22b5d102a8d74001c0d12f68e714
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Wed Mar 9 00:54:21 2016 -0500
+
+    debugged the functions
+
+commit 2d1b7ae181f05d93cd68146f279c2fc0dd4b2357
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Tue Mar 8 23:49:56 2016 -0500
+
+    writing main file
+
+commit e0f3948be78f1f77bce38716f718fea3a622a7f1
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Tue Mar 8 23:31:07 2016 -0500
+
+    added power spectrum and correlation functions inside main
+
+commit 42bc93feb6c028cf96603bcb4629899ce1051228
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Tue Mar 8 20:01:31 2016 -0500
+
+    wrote the procedure
+
+commit feaa1c1270978caad951f693eff932c86cf8c3a2
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Tue Mar 8 19:48:48 2016 -0500
+
+    makefile added
+
+commit 551b6770e04e78584887e71dd172f738cc269a05
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Tue Mar 8 19:27:47 2016 -0500
+
+    started the assignment
+
+commit 3ae325d807681023c7a00cebe0f46b68fbf0f760
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Thu Feb 25 19:42:50 2016 -0500
+
+    git log added
+
+commit bbc9605f01236500caba841972c18eb6bec2557f
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Thu Feb 25 16:51:15 2016 -0500
+
+    added git log
+
+commit d96236d08fd42932961d59beed88fc177adfa0c4
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Thu Feb 25 16:48:47 2016 -0500
+
+    fixed everything
+
+commit e7c1b7bdd777eb5532e4319a68d350262acb66c4
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Thu Feb 25 13:46:05 2016 -0500
+
+    output of second part of assignment 2
+
+commit 0157490414dff13175ff355561eb4edbde2ed24a
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Thu Feb 25 12:06:30 2016 -0500
+
+    no errors while printing the 25 iterations over mass
+
+commit 7197f6e5999dab6dd9adc9e83d6b6fec8d56c177
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Wed Feb 24 16:13:53 2016 -0500
+
+    fixed the issue of printing out zero by assiging an initial value to the x_root
+
+commit 7aec162fbb702b0e817cf9440d0f82fe80391105
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Tue Feb 23 17:50:24 2016 -0500
+
+    added mass-extension relation codes but the return value of root is 0 in to the consule while it shows correct inside the for loop
+
+commit 1fd3f63e42f22daece02de74677333fc511ea8bd
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Tue Feb 23 11:40:39 2016 -0500
+
+    works for mass of 0.3 but printing on the consule is still 0 even though the root printing inside the loop is correct
+
+commit 7d9d399034840b6aa0decebef4a46c45d6c24b86
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Mon Feb 22 11:57:19 2016 -0500
+
+    finding the minimum by finding the root of the derivative of the energy
+
+commit 5125dd62696fac29d43140689475d5958d448a09
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Sun Feb 21 16:13:11 2016 -0500
+
+    finding one minimum
+
+commit b0f3eae3779434fa3c6bfca30992ea6400c759bd
+Merge: 423ae04 fb3f236
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Sun Feb 21 13:44:24 2016 -0500
+
+    Merge branch 'master' of github.com:Andromedanita/Scinet_course
+
+commit 423ae047a4f041db11fc13d87deb513bcc5bd712
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Sun Feb 21 13:44:10 2016 -0500
+
+    testing gsl minimization
+
+commit fb3f236c8edcc2b52c7b61f14c06ef7ced70acff
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Wed Feb 10 00:12:11 2016 -0500
+
+    Editted the report
+
+commit 089a6d9359941f79b462e1c3df3652d0f3ef9702
+Merge: a185db1 c21cbde
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Wed Feb 10 00:11:03 2016 -0500
+
+    Merge branch 'master' of https://github.com/Andromedanita/Scinet_course
+
+commit a185db14b9441c54511dc52d815402e885f1f6da
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Wed Feb 10 00:10:07 2016 -0500
+
+    Editted the report
+
+commit c21cbde635d5b41cb315a0f647ee120622e4bed2
+Merge: 95c5f73 393ab39
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Wed Feb 10 00:04:40 2016 -0500
+
+    Merge branch 'master' of github.com:Andromedanita/Scinet_course
+
+commit 95c5f73cc60ebbf9e8d7f500a5e18325641cd6b6
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Wed Feb 10 00:04:33 2016 -0500
+
+    Makefile cleaned, boost code commented and output files added to git
+
+commit 393ab399bd043ef38e07d587fb624df1f5c87d37
+Merge: 7dc2f6e 1298736
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Tue Feb 9 23:08:46 2016 -0500
+
+    Merge branch 'master' of https://github.com/Andromedanita/Scinet_course
+
+commit 7dc2f6eac9e228567cb659b4b1a7b3b4fc5e7f6a
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Tue Feb 9 23:08:38 2016 -0500
+
+    added suggestions for making the code faster
+
+commit 129873616b79d3b570c8602ebc53c577702215c2
+Author: Anita <anita.bahmanyar@mail.utoronto.ca>
+Date:   Tue Feb 9 23:07:57 2016 -0500
+
+    Create README.md
+
+commit e2651d72cacddfd4c8d12cc4de176d0f7fc061c3
+Merge: 0bae118 194af05
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Tue Feb 9 23:06:45 2016 -0500
+
+    Merge branch 'master' of https://github.com/Andromedanita/Scinet_course
+
+commit 0bae118760cd9995172e9cc4eec221dbefe3ae8f
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Tue Feb 9 23:06:37 2016 -0500
+
+    added suggestions for making the code faster
+
+commit 194af05044591b05e946b5777058b2c66bf30628
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Tue Feb 9 20:06:47 2016 -0500
+
+    added comments and cleaned the Makefile
+
+commit 68c6969007f0ce7f3fdf4950705685c641924aea
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Tue Feb 9 20:02:36 2016 -0500
+
+    Makefile includes boost command and boost_test code runs with no error on scinet
+
+commit 349bc59df49f1c5b78e45e7418726999fa9466f9
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Tue Feb 9 18:12:40 2016 -0500
+
+    profiling report added
+
+commit d90f03e777b5ff5b5aa49fb5c7e4be714fa9f0b2
+Merge: 1dfe673 8dd6102
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Tue Feb 9 18:09:16 2016 -0500
+
+    Merge branch 'master' of https://github.com/Andromedanita/Scinet_course
+
+commit 1dfe6731abe02325f63aba22029691ce277ff2fd
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Tue Feb 9 18:09:09 2016 -0500
+
+    profiling report added
+
+commit 8dd61029687530b7f4f4a683ec65356cb8167814
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Tue Feb 9 18:08:21 2016 -0500
+
+    commented the Makefile more
+
+commit 7dce34157319effd28ed031f9182c0ffa28f478b
+Merge: ff58837 214cb59
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Tue Feb 9 17:40:25 2016 -0500
+
+    Merge branch 'master' of github.com:Andromedanita/Scinet_course
+
+commit ff588376ed85bf702bfa24e4ef31e77053cba37e
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Tue Feb 9 17:39:38 2016 -0500
+
+    added --line to the gprof
+
+commit 214cb5986c1030706fad606e03f153ef140cafee
+Merge: 20aa8be 9187df3
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Tue Feb 9 17:26:00 2016 -0500
+
+    timing of both codes added
+
+commit 20aa8be90c7c37c821abeede9f3a60c0aeee323d
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Tue Feb 9 17:22:04 2016 -0500
+
+    Started writing report on timing for both codes
+
+commit 9187df35e982c1e1ea1af392ab90c4b2212a462f
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Tue Feb 9 16:00:47 2016 -0500
+
+    added timing for each time step
+
+commit b0dd3a8c451bb6ced4f7f76943777a5b2ac43b46
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Tue Feb 9 15:30:49 2016 -0500
+
+    testing git
+
+commit 660aafed3ace5ddea3f9a696caf300a45c5610cd
+Merge: cd0de37 c4efa13
+Author: Andromedanita <anita.bahmanyar@gmail.com>
+Date:   Tue Feb 9 15:29:46 2016 -0500
+
+    Merge branch 'master' of github.com:Andromedanita/Scinet_course
+
+commit c4efa136b54567c03edd6eec3a5c85076edb05ec
+Merge: 4db1f4d 13264d8
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Tue Feb 9 15:26:03 2016 -0500
+
+    merged ants.cc
+
+commit 4db1f4de26d73de338e8f3ecf1fba856890dc184
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Tue Feb 9 15:22:59 2016 -0500
+
+    Added timing for each time step and added the printing of the times
+
+commit cd0de370a54b7a0894434c827f38dd0664aecf6f
+Author: Anita Bahmanyar <bahmanya@gpc-f101n084-ib0.(none)>
+Date:   Tue Feb 9 15:06:57 2016 -0500
+
+    Added timing of each timestep and printing out of the time for each step
+
+commit 13264d87b3065fcd8b011b57e3429330f0f7c816
+Author: Anita <anita.bahmanyar@gmail.com>
+Date:   Thu Feb 4 01:18:23 2016 -0500
+
+    boost log added
+
+commit 86c37572287b45d286bee7d4de6988ec8265a5d5
+Author: Anita <anita.bahmanyar@gmail.com>
+Date:   Thu Feb 4 01:16:47 2016 -0500
+
+    boost code added
+
+commit 4b7ef742952a4d305cfd12585ed9cb021ce63a5b
+Author: Anita <anita.bahmanyar@gmail.com>
+Date:   Thu Feb 4 01:14:44 2016 -0500
+
+    boost added
+
+commit f78f352493fc2faf81b9e25761548de198a2da8f
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Wed Feb 3 11:40:20 2016 -0500
+
+    profiling commands added to the Makefile
+
+commit b1df1d936b205cd3bd152ce95528166239a4ca42
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Wed Feb 3 11:38:20 2016 -0500
+
+    original code renames
+
+commit 262bed0a90d060c13ed336f1166b79f4b7d8099e
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Sun Jan 31 19:09:58 2016 -0500
+
+    ticktock added
+
+commit d46feccbb267b25f99d8c127a4935f7b9df13d11
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Wed Jan 27 14:45:37 2016 -0500
+
+    added output files for the homework
+
+commit c5d9d6f685e72772ce4ebde713f6e7d4c038221f
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Wed Jan 27 14:39:42 2016 -0500
+
+    using pointer to pointer array as test- not for class
+
+commit 718aad9c12c511007bed5a58e610b06b6da84e31
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Wed Jan 27 14:38:44 2016 -0500
+
+    cleaned and added comments
+
+commit 45324cc6fea4dc982c299737378c40f3a6af67e0
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Tue Jan 26 17:39:10 2016 -0500
+
+    Makefile added
+
+commit 0b7b17827bf84749c2dcb0b0b16842803cb60c68
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Sun Jan 24 23:53:23 2016 -0500
+
+    modularized the code and used rarray library
+
+commit a7e2cc6fb0f96932ed8b1436648c188567e176cd
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Fri Jan 22 12:13:01 2016 -0500
+
+    original code
+
+commit 399184d8ffa91402409ef8c160ecb9c51f1552ff
+Author: “Anita <“bahmanyar@astro.utoronto.ca”>
+Date:   Tue Jan 19 15:00:14 2016 -0500
+
+    first assignment added
