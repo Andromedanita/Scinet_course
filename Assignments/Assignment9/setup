@@ -1,0 +1,5 @@
+module purge
+module load Xlibraries extras emacs git
+module load gcc/4.8.1
+module load pgplot/5.2.2-gcc
+module load rarray/1.1
