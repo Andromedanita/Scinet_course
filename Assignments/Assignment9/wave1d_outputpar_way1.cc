@@ -4,7 +4,6 @@
 // 
 // SciNet - March 2015
 
-
 #include <iostream>
 #include <fstream>
 #include <cmath>
@@ -14,6 +13,9 @@
 #include "ticktock.h"
 #include "inifile.h"
 #include <omp.h>
+#include <string>
+
+using namespace std;
 
 int main(int argc, char* argv[])
 {
@@ -112,24 +114,20 @@ int main(int argc, char* argv[])
     // measure time
     TickTock tt;
     tt.tick();
-        
-    // Take timesteps (we cannot parallelize this part b/c each one depends on the previous time steps)
+    
+    // Take timesteps
     for (int s = 0; s < nsteps; s++) {
 
         // Set zero dirichlet boundary conditions
         rho[0] = 0.0;
         rho[ngrid+1] = 0.0;
-	// defining shared variables between all threads
-#pragma omp parallel default(none) shared (rho_next,rho, rho_prev,ngrid,c,dx,dt,tau)
-{
-  // parallelizing the for loop since this is the part that does not depend on the previous values
-#pragma omp for
+
+        // Evolve
         for (int i = 1; i <= ngrid; i++) {
             float laplacian = pow(c/dx,2)*(rho[i+1] + rho[i-1] - 2*rho[i]);
             float friction = (rho[i] - rho_prev[i])/tau;
             rho_next[i] = 2*rho[i] - rho_prev[i] + dt*(laplacian*dt-friction);
         }
-}
 
         // Rotate array pointers so t+1 becomes the new t etc.
         rarray<float,1> temp;
@@ -154,10 +152,27 @@ int main(int argc, char* argv[])
               cpgebuf();
               sleep(1); // artificial delay! 
            } else {
-              dataFile << time << "\n";
-              for (int i = 0; i < npnts; i++ ) 
-                 dataFile<< x[i] << " " << rho[i] << "\n"; 
-              dataFile << "\n";
+	     int threads; // this is so that it is defined before making it a private variable for the omp
+#pragma omp parallel default(none) shared (cout,npnts,x,rho) private(threads)
+	     {
+	       // naming the output file
+	       ofstream par1file;
+	       // getting the number of the current thread
+	       threads = omp_get_thread_num();
+	       // string version of the thread number to insert in filename
+	       string thread_filename = to_string(threads);
+	       // filename
+	       string filename = "parallel_way1_" + thread_filename + ".out";
+	       // openning the output file
+	       par1file.open(filename.c_str());
+	     par1file << time << "\n";
+	     // parallelizing the for loop
+	     #pragma omp for
+             for (int i = 0; i < npnts; i++ ) 
+	       par1file << x[i] << " " << rho[i] << "\n"; // writing data to the output file 
+	     par1file.close(); // closing the output file
+	     }
+             dataFile << "\n";
            } 
         }
     }
