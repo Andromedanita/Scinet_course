@@ -21,8 +21,11 @@ int main(int argc, char* argv[])
     // rank, size and ierr for MPI 
     int rank, size;
     int ierr;
+
+    int left, right;
     int tag = 1;
     
+    double msgsent, msgrcvd;
     MPI_Status rstatus;
 
     // initalizing MPI
@@ -92,11 +95,10 @@ int main(int argc, char* argv[])
     }
 
     // figuring out the local x1 and x2
-    double local_x1, local_x2;
-    int xrange = local_num * dx;
+    int local_x1, local_x2;
+    int xrange = x2 - x1;
     int left   = rank - 1;
     int right  = rank +1;
-
     
     if (rank == 0){
       // on processor 0
@@ -106,24 +108,14 @@ int main(int argc, char* argv[])
       // send local x2 to the next processor (from 0 -> 1)
       ierr = MPI_Ssend(&local_x2, 1, MPI_DOUBLE, right, tag, MPI_COMM_WORLD);
     }
-
-
-    if ((rank>0) && (rank<size-1)){
-      ierr = MPI_Recv(&local_x1, 1, MPI_DOUBLE, left, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      local_x1 += dx;
-      local_x2 = local_x1 + xrange;
-      ierr = MPI_Ssend(&local_x2, 1, MPI_DOUBLE, right, tag, MPI_COMM_WORLD);
-    }
-    
       
-    if (rank == (size-1)){
-      // receive local x2 from 0 to 1  
-      ierr = MPI_Recv(&local_x1, 1, MPI_DOUBLE, left, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      local_x1 +=  dx;
+    else if (rank == 1){
+      local_x1 = local_x2 + dx;
       local_x2 = local_x1 + xrange;
-      }
 
-    cout << "rank is: " << rank << "\t" << "local x1: " << local_x1 << "\t" << "local x2: " << local_x2 << "\n" << endl;
+      // receive local x2 from 0 to 1
+      ierr = MPI_Recv(&local_x2, 1, MPI_DOUBLE, left, tag, MPI_COMM_WORLD);
+      }
     
     // Define and allocate arrays.
     rarray<float,1> rho_prev(npnts); // time step t-1
