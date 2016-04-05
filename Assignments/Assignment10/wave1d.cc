@@ -16,6 +16,7 @@
 
 int main(int argc, char* argv[])
 {
+    // rank, size and ierr for MPI 
     int rank, size;
     int ierr;
 
@@ -24,9 +25,14 @@ int main(int argc, char* argv[])
     
     double msgsent, msgrcvd;
     MPI_Status rstatus;
-    
+
+    // initalizing MPI
     ierr = MPI_Init(&argc, &argv);
+
+    // MPI rank
     ierr = MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+
+    // MPI size
     ierr = MPI_Comm_size(MPI_COMM_WORLD, &size);
     
     // Open inifile and parse (using Inifile class from inifile.h)
@@ -72,9 +78,12 @@ int main(int argc, char* argv[])
     std::cout << "#graphics " << int(graphics) << std::endl;
 
 
+    // Part 2 of the assignment
     int local_num = (npnts/size)+2; // we add 2 to include ghost cells as well
-    int remainder = npnts%size;      // this is the remainder
+    int remainder = npnts%size;     // this is the remainder
 
+    // this is handling the case where the total number of points
+    // is not divisible by the number of processors (so remainder is not 0)
     if (remainder != 0 ){
       for (int points=0; points < local_num;points++){
 	if (rank == points){
@@ -83,15 +92,12 @@ int main(int argc, char* argv[])
       }
     }
 
-
-
     // Define and allocate arrays.
     rarray<float,1> rho_prev(npnts); // time step t-1
     rarray<float,1> rho(npnts);      // time step t
     rarray<float,1> rho_next(npnts); // time step t+1
     rarray<float,1> rho_init(npnts); // initial values
     rarray<float,1> x(npnts);        // x values
-
 
     
     // Initialize.
