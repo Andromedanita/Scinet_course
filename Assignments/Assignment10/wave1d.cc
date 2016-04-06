@@ -18,21 +18,15 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    // rank, size and ierr for MPI 
+    // rank, size, tag  and ierr for MPI 
     int rank, size;
     int ierr;
     int tag = 1;
-    
-    MPI_Status rstatus;
 
-    // initalizing MPI
-    ierr = MPI_Init(&argc, &argv);
-
-    // MPI rank
-    ierr = MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-
-    // MPI size
-    ierr = MPI_Comm_size(MPI_COMM_WORLD, &size);
+    // MPI stuff
+    ierr = MPI_Init(&argc, &argv); // initalizing
+    ierr = MPI_Comm_rank(MPI_COMM_WORLD, &rank); // rank
+    ierr = MPI_Comm_size(MPI_COMM_WORLD, &size); // size
     
     // Open inifile and parse (using Inifile class from inifile.h)
     Inifile parameter(argc==1?"default.txt":argv[1]);
@@ -91,39 +85,35 @@ int main(int argc, char* argv[])
       }
     }
 
-    // figuring out the local x1 and x2
+    // part 3 of assignment, finding local x1 and x2
     double local_x1, local_x2;
-    int xrange = local_num * dx;
-    int left   = rank - 1;
-    int right  = rank +1;
+    int    xrange = local_num * dx;
+    int    left   = rank - 1;
+    int    right  = rank +1;
 
-    
+    // this is done only for rank 0 since we do not want to receive anything here
     if (rank == 0){
-      // on processor 0
-      local_x1 = x1;
-      local_x2 = local_x1 + xrange;
-      
-      // send local x2 to the next processor (from 0 -> 1)
-      ierr = MPI_Ssend(&local_x2, 1, MPI_DOUBLE, right, tag, MPI_COMM_WORLD);
+      local_x1 = x1; // local x1 for rank 0 is same as x1
+      local_x2 = local_x1 + xrange; // local x2 for rank 0
+      ierr = MPI_Ssend(&local_x2, 1, MPI_DOUBLE, right, tag, MPI_COMM_WORLD); // sending local x2 to the right (to rank 1)
     }
 
-
+    // this is done for ranks 1-(size-1)
     if ((rank>0) && (rank<size-1)){
-      ierr = MPI_Recv(&local_x1, 1, MPI_DOUBLE, left, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      local_x1 += dx;
-      local_x2 = local_x1 + xrange;
-      ierr = MPI_Ssend(&local_x2, 1, MPI_DOUBLE, right, tag, MPI_COMM_WORLD);
+      ierr = MPI_Recv(&local_x1, 1, MPI_DOUBLE, left, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE); // receiving local x2 from rank 0
+      local_x1 += dx;               // defining local x1 for these ranks
+      local_x2 = local_x1 + xrange; // defining local x2 for these ranks
+      ierr = MPI_Ssend(&local_x2, 1, MPI_DOUBLE, right, tag, MPI_COMM_WORLD); // sending local x2 to the next rank
     }
     
-      
+    // this is only for the last rank (size-1) since we do not want to send anything
     if (rank == (size-1)){
-      // receive local x2 from 0 to 1  
-      ierr = MPI_Recv(&local_x1, 1, MPI_DOUBLE, left, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      local_x1 +=  dx;
-      local_x2 = local_x1 + xrange;
+      ierr = MPI_Recv(&local_x1, 1, MPI_DOUBLE, left, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE); // receiving from previous rank
+      local_x1 += dx;               // defining local x1 for this rank 
+      local_x2 = local_x1 + xrange; // defining local x2 for this rank
       }
 
-    cout << "rank is: " << rank << "\t" << "local x1: " << local_x1 << "\t" << "local x2: " << local_x2 << "\n" << endl;
+    cout << "\n" << "rank is: " << rank << "\t" << "local x1: " << local_x1 << "\t" << "local x2: " << local_x2 << "\n" << endl;
     
     // Define and allocate arrays.
     rarray<float,1> rho_prev(npnts); // time step t-1
