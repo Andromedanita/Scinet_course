@@ -87,17 +87,17 @@ int main(int argc, char* argv[])
 
     // part 3 of assignment, finding local x1 and x2
     double local_x1, local_x2;
-    int    xrange   = local_num * dx; //range of x to be added to find local x2 value
-    int    left     = rank - 1; // left
-    int    right    = rank +1;  //right
-    int    init_i   = 0; //this is initial index of i in each array in each processor (this is to avoid beginning of arrays to be 0)
+    int    xrange   = local_num * dx;
+    int    left     = rank - 1;
+    int    right    = rank +1;
+    int    init_i   = 0;
     int    send_i   = 0;
     
     // this is done only for rank 0 since we do not want to receive anything here
     if (rank == 0){
       local_x1 = x1; // local x1 for rank 0 is same as x1
       local_x2 = local_x1 + xrange; // local x2 for rank 0
-      send_i =+ local_num; // sending index of i
+      send_i =+ local_num;
       ierr = MPI_Ssend(&local_x2, 1, MPI_DOUBLE, right, tag, MPI_COMM_WORLD); // sending local x2 to the right (to rank 1)
       ierr = MPI_Ssend(&send_i, 1, MPI_INT, right, tag, MPI_COMM_WORLD);      // sending the index i to the right 
     }
@@ -108,7 +108,7 @@ int main(int argc, char* argv[])
       ierr = MPI_Recv(&init_i, 1, MPI_DOUBLE, left, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);   // receiving index i for the array
       local_x1 += dx;               // defining local x1 for these ranks
       local_x2 = local_x1 + xrange; // defining local x2 for these ranks
-      send_i = init_i + local_num;  // to update the index to be sent to the next processor
+      send_i = init_i + local_num;
       ierr = MPI_Ssend(&local_x2, 1, MPI_DOUBLE, right, tag, MPI_COMM_WORLD); // sending local x2 to the next rank
       ierr = MPI_Ssend(&send_i, 1, MPI_DOUBLE, right, tag, MPI_COMM_WORLD); // sending the updated index i to the next rank
     }
