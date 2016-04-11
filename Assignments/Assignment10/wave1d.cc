@@ -18,16 +18,15 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    // rank, size, tag  and ierr for MPI 
-    int rank, size;
+    // rank, size, tag  and ierr for MPI
+    int rank, nProc;
     int ierr;
     int tag = 1;
 
     // MPI stuff
     ierr = MPI_Init(&argc, &argv); // initalizing
     ierr = MPI_Comm_rank(MPI_COMM_WORLD, &rank); // rank
-    ierr = MPI_Comm_size(MPI_COMM_WORLD, &size); // size
-    
+    ierr = MPI_Comm_size(MPI_COMM_WORLD, &nProc); // size            
     // Open inifile and parse (using Inifile class from inifile.h)
     Inifile parameter(argc==1?"default.txt":argv[1]);
 
@@ -47,8 +46,8 @@ int main(int argc, char* argv[])
     bool    graphics = parameter.get<bool>("graphics", true);   // output to graphics (with 1 sec delay)  or to a file?
 
     // Output file name
-    const std::string dataFilename = "dataFilename.out";
-
+    std::string dataFilename = "dataFilename.out";
+    dataFilename += to_string(rank); // to write each processor's output to different filenames
     // Derived parameters
     int     ngrid   = (x2-x1)/dx;  // number of x points
     int     npnts   = ngrid + 2;   // number of x points including boundary points
@@ -69,85 +68,47 @@ int main(int argc, char* argv[])
     std::cout << "#nsteps   " << nsteps  << std::endl;    
     std::cout << "#nper     " << nper    << std::endl;
     std::cout << "#graphics " << int(graphics) << std::endl;
-
-
-    // Part 2 of the assignment
-    int local_num = (npnts/size)+2; // we add 2 to include ghost cells as well
-    int remainder = npnts%size;     // this is the remainder
-
-    // this is handling the case where the total number of points
-    // is not divisible by the number of processors (so remainder is not 0)
-    if (remainder != 0 ){
-      for (int points=0; points < local_num;points++){
-	if (rank == points){
-	  local_num++;
-	}
-      }
-    }
-
-    // part 3 of assignment, finding local x1 and x2
-    double local_x1, local_x2;
-    int    xrange   = local_num * dx; //range of x to be added to find local x2 value
-    int    left     = rank - 1; // left
-    int    right    = rank +1;  //right
-    int    init_i   = 0; //this is initial index of i in each array in each processor (this is to avoid beginning of arrays to be 0)
-    int    send_i   = 0;
     
-    // this is done only for rank 0 since we do not want to receive anything here
-    if (rank == 0){
-      local_x1 = x1; // local x1 for rank 0 is same as x1
-      local_x2 = local_x1 + xrange; // local x2 for rank 0
-      send_i =+ local_num; // sending index of i
-      ierr = MPI_Ssend(&local_x2, 1, MPI_DOUBLE, right, tag, MPI_COMM_WORLD); // sending local x2 to the right (to rank 1)
-      ierr = MPI_Ssend(&send_i, 1, MPI_INT, right, tag, MPI_COMM_WORLD);      // sending the index i to the right 
-    }
+    double time = 0;
+    
+    float localSize = ngrid / nProc; // local number of points in each processor
+    // dividing total number of points between processors and giving the remainder to the last one (since its not many compared to total number)
+    if (rank == nProc -1)
+      localSize += ngrid % nProc;
+    cout << rank << " is responsible for " << localSize <<" points" << endl;
+    float localx1 = x1 + (rank * ((ngrid / nProc) * dx)); // defining local x1 for each  processors
 
-    // this is done for ranks 1-(size-1)
-    if ((rank>0) && (rank<size-1)){
-      ierr = MPI_Recv(&local_x1, 1, MPI_DOUBLE, left, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE); // receiving local x2 from rank 0
-      ierr = MPI_Recv(&init_i, 1, MPI_DOUBLE, left, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);   // receiving index i for the array
-      local_x1 += dx;               // defining local x1 for these ranks
-      local_x2 = local_x1 + xrange; // defining local x2 for these ranks
-      send_i = init_i + local_num;  // to update the index to be sent to the next processor
-      ierr = MPI_Ssend(&local_x2, 1, MPI_DOUBLE, right, tag, MPI_COMM_WORLD); // sending local x2 to the next rank
-      ierr = MPI_Ssend(&send_i, 1, MPI_DOUBLE, right, tag, MPI_COMM_WORLD); // sending the updated index i to the next rank
-    }
-    
-    // this is only for the last rank (size-1) since we do not want to send anything
-    if (rank == (size-1)){
-      ierr = MPI_Recv(&local_x1, 1, MPI_DOUBLE, left, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE); // receiving from previous rank
-      ierr = MPI_Recv(&init_i, 1, MPI_DOUBLE, left, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE); // receiving index i from previous rank 
-      local_x1 += dx;               // defining local x1 for this rank 
-      local_x2 = local_x1 + xrange; // defining local x2 for this rank
-      }
-
-    cout << "\n" << "rank is: " << rank << "\t" << "local x1: " << local_x1 << "\t" << "local x2: " << local_x2 << "\n" << endl;
-    
-    // Define and allocate arrays.
-    rarray<float,1> rho_prev(npnts); // time step t-1
-    rarray<float,1> rho(npnts);      // time step t
-    rarray<float,1> rho_next(npnts); // time step t+1
-    rarray<float,1> rho_init(npnts); // initial values
-    rarray<float,1> x(npnts);        // x values
-
-    
-    
-    // Initialize.
-    int global_ind = 0;
-    for (int i = 1; i<(local_num) ; i++) {
-        global_ind = i + init_i;
-        x[i]   = x1 + ((global_ind-1)*(x2-x1))/ngrid; 
+    // defining left and right movements for send and receive 
+    int left  = rank - 1;
+    int right = rank + 1;
+    // Define and allocate arrays. (these are local size arrays for each processor rather than the whole size)
+    rarray<float,1> rho_prev(localSize + 2); // time step t-1
+    rarray<float,1> rho(localSize + 2);      // time step t
+    rarray<float,1> rho_next(localSize + 2); // time step t+1
+    rarray<float,1> rho_init(localSize + 2); // initial values
+    rarray<float,1> x(localSize + 2);        // x values
+ 
+    // Initialize. (this is for each processor, so the loop is until the size of each processor array)
+    for (int i = 1; i <= localSize; i++) {
+        x[i]   = localx1 + (i-1) * dx;
         rho[i] = 0.0;
         rho_prev[i] = 0.0;
         rho_next[i] = 0.0;
-	// Exciting
-	for (int i= npnts/4 + 1; i < 3*npnts/4; i++) {
-	  rho[i] = 0.25 - fabs(float((global_ind)-npnts/2)/float(npnts));
+    }
+
+    // Excite.
+    // this loop is also going over local number of points for each professor only
+    for ( int i = 1 ; i <= localSize ; i++ )
+      {
+	// defining a global index variable to keep track of where we are in the full rho array
+	int globali = (i-1) + (rank * (ngrid / nProc));
+	// this is only to change rho values if its in this interval, otherwise it stays 0
+	if (globali >= npnts/4 + 1 && globali < 3*npnts/4){
+	  rho[i] = 0.25 - fabs(float(globali-npnts/2)/float(npnts));
 	  rho_prev[i] = rho[i];
 	  rho_init[i] = rho[i];
 	}
-    }
- 
+      }
     // Plot or Write out data.
     std::ofstream dataFile;
     int red, grey, white;
@@ -169,9 +130,9 @@ int main(int argc, char* argv[])
     } else {     
        dataFile.open(dataFilename.c_str());
        dataFile << nper << ","   
-                << npnts       << "\n";
+                << localSize       << "\n";
        dataFile << time << "\n";
-       for (int i = 0; i < npnts; i++ ) 
+       for (int i = 1; i <= localSize; i++ ) 
           dataFile << x[i] << " " << rho[i] << " \n";  
        dataFile << "\n";
     }
@@ -179,47 +140,30 @@ int main(int argc, char* argv[])
     // measure time
     TickTock tt;
     tt.tick();
-
-
     
     // Take timesteps
     for (int s = 0; s < nsteps; s++) {
 
+        // Set zero dirichlet boundary conditions
+        rho[0]           = 0.0;
+        rho[localSize+1] = 0.0;
 
-      // sending to the right
-      if ((rank >= 0) && (rank<size-1)){
-	double bound_right = rho[local_num-2]; //right side of the boundary
-	ierr = MPI_send(&bound_right, 1, MPI_DOUBLE, right, 3, MPI_COMM_WORLD);
-      }
+	// for all processors except rank 0 since we want to send the first element of rho to the left (and rank 0 processor does not need to send it to anywhere))
+        if ( rank !=0 )
+	  ierr = MPI_Ssend(&rho[1], 1, MPI_FLOAT, left, tag, MPI_COMM_WORLD);
 
-      // sending to the left
-      if ((rank>0) && (rank <= size-1)){
-	double bound_left = rho[1]; //left side of the boundary
-	ierr = MPI_Send(&bound_left,1,MPI_DOUBLE,left,2,MPI_COMM_WORLD);
-      }
+	// for all processors except last rank since we want to receive the last element of rho array from the right and send the previous one to right
+	if (rank != nProc - 1) {
+	  ierr = MPI_Recv(&rho[localSize+1], 1, MPI_FLOAT, right, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+	  ierr = MPI_Ssend(&rho[localSize], 1, MPI_FLOAT, right, tag, MPI_COMM_WORLD);
+	}
 
-      // receiving from the right
-      if ((rank >= 0) && (rank < size-1)){
-	double bound_right;
-        ierr = MPI_Recv(&bound_right,1,MPI_DOUBLE,right,2,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
-        rho[local_num-1] = right;
-      }
-
-      // receiving from the right
-      if ((rank > 0) && (rank <= size-1)){
-	double bound_left;
-        ierr = MPI_Recv(&bound_left,1,MPI_DOUBLE,left,3,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
-        rho[0] = left;
-      }
-      
-      // boundary of the whole thing (first and last element) (these are the Dirichlet values)
-      if ((rank==0) || (rank==(size-1))){
-        rho[0] = 0.0;
-	rho[local_num-1] = 0.0;
-      }
-
+	// if the rank is not 0, we want to receive rho[0] from the left
+	if ( rank != 0 )
+	  ierr = MPI_Recv(&rho[0], 1, MPI_FLOAT, left, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+	
         // Evolve
-        for (int i = 1; i <= ngrid; i++) {
+        for (int i = 1; i <= localSize; i++) {
             float laplacian = pow(c/dx,2)*(rho[i+1] + rho[i-1] - 2*rho[i]);
             float friction = (rho[i] - rho_prev[i])/tau;
             rho_next[i] = 2*rho[i] - rho_prev[i] + dt*(laplacian*dt-friction);
@@ -231,7 +175,7 @@ int main(int argc, char* argv[])
         rho_prev = rho;
         rho      = rho_next;
         rho_next = temp;  
-	
+  	time     = s*dt;   // updating time
         //Output every nper
         if ((s+1)%nper == 0) {
            if (graphics) {
@@ -249,7 +193,7 @@ int main(int argc, char* argv[])
               sleep(1); // artificial delay! 
            } else {
               dataFile << time << "\n";
-              for (int i = 0; i < npnts; i++ ) 
+              for (int i = 1; i <= localSize; i++ ) // the loop goes until the local size of arrays in each processor only 
                  dataFile<< x[i] << " " << rho[i] << "\n"; 
               dataFile << "\n";
            } 
@@ -262,7 +206,7 @@ int main(int argc, char* argv[])
     // Close file.
     if (not graphics)
        dataFile.close();
-
-    ierr = MPI_Finalize();
+    
+    ierr = MPI_Finalize(); // finalizing MPI
     return 0;
 }
